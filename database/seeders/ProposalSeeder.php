@@ -33,10 +33,19 @@ class ProposalSeeder extends Seeder
             
             $lead = $leads->random();
             
+            // Create proposal without total_amount initially, let boot() handle proposal_number
             $proposal = Proposal::create([
                 'lead_id' => $lead->id,
                 'status' => $data['status'],
+                'issue_date' => now()->subDays($index),
+                'valid_until' => now()->addDays(14 - $index),
+                'tax_rate' => 11,
+                'discount' => 0,
+                'subtotal' => 0,
+                'tax_amount' => 0,
                 'total_amount' => 0,
+                'notes' => 'Proposal untuk proyek ' . $lead->title,
+                'terms_and_conditions' => 'Pembayaran 30% di muka, pelunasan setelah penyelesaian.',
             ]);
             
             // Add 2-4 items to each proposal
@@ -59,8 +68,9 @@ class ProposalSeeder extends Seeder
                 ]);
             }
             
-            // Update total amount
-            $proposal->update(['total_amount' => $totalAmount]);
+            // Update total amount using calculateTotals
+            $proposal->calculateTotals();
+            $proposal->save();
         }
     }
 }
