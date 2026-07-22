@@ -3,173 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Enterprise CRM</title>
+    <title>Login - NexusCRM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+        }
     </style>
 </head>
-<body class="bg-slate-50 h-screen w-full flex overflow-hidden">
-
-    <!-- Left Side: Branding & Visual (Hidden on Mobile) -->
-    <div class="hidden lg:flex lg:w-1/2 bg-slate-900 relative flex-col justify-between p-12 text-white overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-20">
-            <svg class="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="url(#grad1)" />
-                <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-            </svg>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
+        <!-- Left Side - Branding -->
+        <div class="gradient-bg p-12 flex flex-col justify-between hidden lg:flex">
+            <div>
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
+                        <ion-icon name="pulse" class="text-white text-2xl"></ion-icon>
+                    </div>
+                    <span class="text-2xl font-bold text-white">NexusCRM</span>
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-6 leading-tight">
+                    Kelola Bisnis dengan Lebih Cerdas
+                </h1>
+                <p class="text-slate-300 text-lg mb-8">
+                    Bergabunglah dengan ribuan bisnis lain yang telah merasakan manfaat platform CRM terintegrasi kami.
+                </p>
+                
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3 text-slate-300">
+                        <ion-icon name="checkmark-circle" class="text-green-400 text-xl"></ion-icon>
+                        <span>Pipeline Kanban yang Intuitif</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-slate-300">
+                        <ion-icon name="checkmark-circle" class="text-green-400 text-xl"></ion-icon>
+                        <span>Digital Invoice Otomatis</span>
+                    </div>
+                    <div class="flex items-center space-x-3 text-slate-300">
+                        <ion-icon name="checkmark-circle" class="text-green-400 text-xl"></ion-icon>
+                        <span>Analytics & Reporting Lengkap</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="flex items-center space-x-2 mb-4">
+                    <div class="flex -space-x-2">
+                        <div class="w-10 h-10 bg-blue-400 rounded-full border-2 border-slate-700"></div>
+                        <div class="w-10 h-10 bg-purple-400 rounded-full border-2 border-slate-700"></div>
+                        <div class="w-10 h-10 bg-green-400 rounded-full border-2 border-slate-700"></div>
+                        <div class="w-10 h-10 bg-orange-400 rounded-full border-2 border-slate-700"></div>
+                    </div>
+                    <span class="text-slate-300 ml-2">2000+ pengguna aktif</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <div class="flex text-yellow-400">
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star"></ion-icon>
+                        <ion-icon name="star"></ion-icon>
+                    </div>
+                    <span class="text-white font-semibold">4.9/5 rating</span>
+                </div>
+            </div>
         </div>
         
-        <!-- Content -->
-        <div class="relative z-10">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/50">
-                    <ion-icon name="pulse" class="text-2xl text-white"></ion-icon>
+        <!-- Right Side - Login Form -->
+        <div class="p-8 lg:p-12">
+            <div class="max-w-md mx-auto">
+                <div class="lg:hidden flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <ion-icon name="pulse" class="text-white text-xl"></ion-icon>
+                    </div>
+                    <span class="text-xl font-bold gradient-text">NexusCRM</span>
                 </div>
-                <span class="text-2xl font-bold tracking-tight">Nexus<span class="text-blue-400">CRM</span></span>
-            </div>
-        </div>
-
-        <div class="relative z-10 max-w-md">
-            <h1 class="text-4xl font-bold mb-6 leading-tight">Kelola Hubungan Pelanggan dengan Lebih Cerdas.</h1>
-            <p class="text-slate-300 text-lg mb-8">Platform all-in-one untuk tim sales, support, dan manajemen. Pantau pipeline, kelola invoice, dan tingkatkan produktivitas dalam satu dashboard.</p>
-            
-            <div class="flex gap-4">
-                <div class="flex -space-x-3">
-                    <img class="w-10 h-10 rounded-full border-2 border-slate-900" src="https://i.pravatar.cc/100?img=1" alt="User">
-                    <img class="w-10 h-10 rounded-full border-2 border-slate-900" src="https://i.pravatar.cc/100?img=2" alt="User">
-                    <img class="w-10 h-10 rounded-full border-2 border-slate-900" src="https://i.pravatar.cc/100?img=3" alt="User">
-                    <div class="w-10 h-10 rounded-full border-2 border-slate-900 bg-slate-700 flex items-center justify-center text-xs font-medium">+2k</div>
-                </div>
-                <div class="flex flex-col justify-center">
-                    <span class="text-yellow-400 flex text-sm">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                    </span>
-                    <span class="text-slate-400 text-xs">Dipercaya oleh 2,000+ perusahaan</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="relative z-10 text-xs text-slate-500">
-            &copy; {{ date('Y') }} NexusCRM Enterprise Solutions. All rights reserved.
-        </div>
-    </div>
-
-    <!-- Right Side: Login Form -->
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-white relative">
-        <div class="w-full max-w-md space-y-8">
-            
-            <!-- Mobile Logo -->
-            <div class="lg:hidden flex items-center gap-2 mb-8">
-                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-                    <ion-icon name="pulse" class="text-xl text-white"></ion-icon>
-                </div>
-                <span class="text-xl font-bold text-slate-800">Nexus<span class="text-blue-600">CRM</span></span>
-            </div>
-
-            <div class="text-center lg:text-left">
-                <h2 class="text-3xl font-bold tracking-tight text-slate-900">Selamat Datang Kembali</h2>
-                <p class="mt-2 text-sm text-slate-500">Silakan masukkan kredensial Anda untuk mengakses dashboard.</p>
-            </div>
-
-            <form class="mt-8 space-y-6" action="{{ route('login') }}" method="POST">
-                @csrf
                 
-                <div class="space-y-5">
-                    <!-- Email Input -->
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">Selamat Datang Kembali</h2>
+                <p class="text-slate-600 mb-8">Masukkan kredensial Anda untuk mengakses dashboard</p>
+                
+                @if ($errors->any())
+                    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                        <div class="flex items-center space-x-2 text-red-700 mb-2">
+                            <ion-icon name="warning" class="text-lg"></ion-icon>
+                            <span class="font-semibold">Login Gagal</span>
+                        </div>
+                        <ul class="text-sm text-red-600 space-y-1">
+                            @foreach ($errors->all() as $error)
+                                <li>• {{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                
+                <form action="{{ route('login') }}" method="POST" class="space-y-6">
+                    @csrf
+                    
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 mb-1">Alamat Email</label>
+                        <label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <ion-icon name="mail-outline" class="text-slate-400"></ion-icon>
+                                <ion-icon name="mail" class="text-slate-400"></ion-icon>
                             </div>
-                            <input id="email" name="email" type="email" autocomplete="email" required 
-                                class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 sm:text-sm" 
-                                placeholder="nama@perusahaan.com" value="{{ old('email') }}">
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                value="{{ old('email') }}"
+                                required 
+                                autofocus
+                                class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+                                placeholder="nama@perusahaan.com"
+                            >
                         </div>
-                        @error('email')
-                            <p class="mt-2 text-xs text-red-600 flex items-center gap-1">
-                                <ion-icon name="warning"></ion-icon> {{ $message }}
-                            </p>
-                        @enderror
                     </div>
-
-                    <!-- Password Input -->
+                    
                     <div>
-                        <label for="password" class="block text-sm font-medium leading-6 text-slate-700 mb-1">Kata Sandi</label>
+                        <label for="password" class="block text-sm font-medium text-slate-700 mb-2">Password</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <ion-icon name="lock-closed-outline" class="text-slate-400"></ion-icon>
+                                <ion-icon name="lock-closed" class="text-slate-400"></ion-icon>
                             </div>
-                            <input id="password" name="password" type="password" autocomplete="current-password" required 
-                                class="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 sm:text-sm" 
-                                placeholder="••••••••">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none"
+                                placeholder="••••••••"
+                            >
                         </div>
-                        @error('password')
-                            <p class="mt-2 text-xs text-red-600 flex items-center gap-1">
-                                <ion-icon name="warning"></ion-icon> {{ $message }}
-                            </p>
-                        @enderror
                     </div>
-                </div>
-
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center">
-                        <input id="remember-me" name="remember-me" type="checkbox" 
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-slate-300 rounded cursor-pointer">
-                        <label for="remember-me" class="ml-2 block text-sm text-slate-600 cursor-pointer select-none">Ingat saya</label>
+                    
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input 
+                                type="checkbox" 
+                                name="remember" 
+                                class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500"
+                            >
+                            <span class="ml-2 text-sm text-slate-600">Ingat saya</span>
+                        </label>
+                        <a href="#" class="text-sm text-blue-600 hover:text-blue-700 font-medium">Lupa password?</a>
                     </div>
-
-                    <div class="text-sm">
-                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500 hover:underline">Lupa kata sandi?</a>
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit" 
-                        class="group relative flex w-full justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50">
-                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                            <ion-icon name="log-in-outline" class="text-blue-300 group-hover:text-white transition-colors"></ion-icon>
-                        </span>
-                        Masuk ke Dashboard
+                    
+                    <button 
+                        type="submit" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 rounded-lg font-semibold transition-all shadow-md hover:shadow-lg flex items-center justify-center space-x-2"
+                    >
+                        <ion-icon name="log-in"></ion-icon>
+                        <span>Masuk ke Dashboard</span>
                     </button>
+                </form>
+                
+                <div class="mt-8 pt-8 border-t border-slate-200">
+                    <p class="text-sm text-slate-600 text-center mb-4 font-medium">Demo Credentials:</p>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                            <span class="text-slate-700 font-medium">Admin</span>
+                            <code class="text-slate-600">admin@crm.com / password123</code>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                            <span class="text-slate-700 font-medium">Manager</span>
+                            <code class="text-slate-600">manager@crm.com / password123</code>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                            <span class="text-slate-700 font-medium">Agent</span>
+                            <code class="text-slate-600">john@crm.com / password123</code>
+                        </div>
+                    </div>
                 </div>
-            </form>
-
-            <!-- Demo Credentials Hint -->
-            <div class="mt-6 pt-6 border-t border-slate-100">
-                <p class="text-xs text-center text-slate-400 mb-2">Demo Login (Gunakan salah satu):</p>
-                <div class="grid grid-cols-3 gap-2 text-[10px] text-slate-500">
-                    <div class="bg-slate-50 p-2 rounded border border-slate-100 text-center">
-                        <span class="block font-semibold text-slate-700">Admin</span>
-                        admin@crm.com
-                    </div>
-                    <div class="bg-slate-50 p-2 rounded border border-slate-100 text-center">
-                        <span class="block font-semibold text-slate-700">Manager</span>
-                        manager@crm.com
-                    </div>
-                    <div class="bg-slate-50 p-2 rounded border border-slate-100 text-center">
-                        <span class="block font-semibold text-slate-700">Agent</span>
-                        john@crm.com
-                    </div>
-                </div>
-                <p class="text-[10px] text-center text-slate-400 mt-2">Password: <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-600">password123</code></p>
+                
+                <p class="mt-8 text-center text-sm text-slate-600">
+                    Belum punya akun? 
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold">Hubungi Admin</a>
+                </p>
             </div>
         </div>
     </div>
-
+    
+    <footer class="fixed bottom-4 text-center text-sm text-slate-500">
+        &copy; 2024 NexusCRM. All rights reserved.
+    </footer>
 </body>
 </html>
