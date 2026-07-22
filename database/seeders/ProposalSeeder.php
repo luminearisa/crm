@@ -22,8 +22,8 @@ class ProposalSeeder extends Seeder
             ['status' => 'draft'],
             ['status' => 'sent'],
             ['status' => 'accepted'],
-            ['status' => 'pending'],
             ['status' => 'rejected'],
+            ['status' => 'expired'],
         ];
 
         foreach ($proposalsData as $index => $data) {
