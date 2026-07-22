@@ -39,6 +39,20 @@ class Proposal extends Model
         ];
     }
 
+    /**
+     * Boot the model to handle auto-generation of proposal number.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($proposal) {
+            if (empty($proposal->proposal_number)) {
+                $proposal->proposal_number = self::generateProposalNumber();
+            }
+        });
+    }
+
     public function lead(): BelongsTo
     {
         return $this->belongsTo(Lead::class);
