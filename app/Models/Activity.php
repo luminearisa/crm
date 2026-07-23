@@ -16,7 +16,6 @@ class Activity extends Model
         'type',
         'activity_date',
         'notes',
-        'subject',
     ];
 
     protected function casts(): array
@@ -39,16 +38,9 @@ class Activity extends Model
     public static function getTypes(): array
     {
         return [
-            'call' => 'Call',
+            'call' => 'Telepon',
             'email' => 'Email',
-            'meeting' => 'Meeting',
-            'note' => 'Note',
-            'task' => 'Task',
+            'meeting' => 'Pertemuan',
         ];
-    }
-
-    public function getTypeLabelAttribute(): string
-    {
-        return self::getTypes()[$this->type] ?? $this->type;
     }
 }

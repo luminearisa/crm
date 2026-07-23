@@ -15,21 +15,18 @@ class Expense extends Model
         'lead_id',
         'amount',
         'category',
-        'expense_date',
+        'date',
         'description',
-        'receipt_path',
         'status',
-        'rejection_reason',
         'approved_by',
-        'approved_at',
+        'receipt_path',
     ];
 
     protected function casts(): array
     {
         return [
+            'date' => 'date',
             'amount' => 'decimal:2',
-            'expense_date' => 'date',
-            'approved_at' => 'datetime',
         ];
     }
 
@@ -51,13 +48,12 @@ class Expense extends Model
     public static function getCategories(): array
     {
         return [
-            'travel' => 'Travel',
-            'meals' => 'Meals',
-            'accommodation' => 'Accommodation',
+            'transport' => 'Transportasi',
+            'accommodation' => 'Akomodasi',
+            'meals' => 'Makan',
             'entertainment' => 'Entertainment',
-            'transportation' => 'Transportation',
-            'office_supplies' => 'Office Supplies',
-            'other' => 'Other',
+            'office_supplies' => 'Perlengkapan Kantor',
+            'other' => 'Lainnya',
         ];
     }
 
@@ -65,33 +61,18 @@ class Expense extends Model
     {
         return [
             'pending' => 'Pending',
-            'approved' => 'Approved',
-            'rejected' => 'Rejected',
+            'approved' => 'Disetujui',
+            'rejected' => 'Ditolak',
         ];
     }
 
-    public function getCategoryLabelAttribute(): string
+    public function getStatusColorAttribute(): string
     {
-        return self::getCategories()[$this->category] ?? $this->category;
-    }
-
-    public function getStatusLabelAttribute(): string
-    {
-        return self::getStatuses()[$this->status] ?? $this->status;
-    }
-
-    public function isPending(): bool
-    {
-        return $this->status === 'pending';
-    }
-
-    public function isApproved(): bool
-    {
-        return $this->status === 'approved';
-    }
-
-    public function isRejected(): bool
-    {
-        return $this->status === 'rejected';
+        return match($this->status) {
+            'approved' => 'green',
+            'rejected' => 'red',
+            'pending' => 'yellow',
+            default => 'gray',
+        };
     }
 }

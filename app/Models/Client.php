@@ -18,25 +18,35 @@ class Client extends Model
         'email',
         'phone',
         'address',
-        'industry',
-        'notes',
     ];
 
-    public function pic(): BelongsTo
+    /**
+     * Get the user (PIC) that owns the client.
+     */
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the leads for the client.
+     */
     public function leads(): HasMany
     {
         return $this->hasMany(Lead::class);
     }
 
+    /**
+     * Get the tickets for the client.
+     */
     public function tickets(): HasMany
     {
         return $this->hasMany(Ticket::class);
     }
 
+    /**
+     * Get the documents for the client.
+     */
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);

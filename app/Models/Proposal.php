@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Proposal extends Model
 {
@@ -14,14 +15,14 @@ class Proposal extends Model
     protected $fillable = [
         'lead_id',
         'proposal_number',
+        'status',
         'issue_date',
         'valid_until',
-        'subtotal',
         'tax_rate',
-        'tax_amount',
         'discount',
+        'subtotal',
+        'tax_amount',
         'total_amount',
-        'status',
         'notes',
         'terms_and_conditions',
     ];
@@ -31,24 +32,23 @@ class Proposal extends Model
         return [
             'issue_date' => 'date',
             'valid_until' => 'date',
-            'subtotal' => 'decimal:2',
             'tax_rate' => 'decimal:2',
-            'tax_amount' => 'decimal:2',
             'discount' => 'decimal:2',
+            'subtotal' => 'decimal:2',
+            'tax_amount' => 'decimal:2',
             'total_amount' => 'decimal:2',
         ];
     }
 
-    /**
-     * Boot the model to handle auto-generation of proposal number.
-     */
-    protected static function boot()
+    public static function boot()
     {
         parent::boot();
 
         static::creating(function ($proposal) {
             if (empty($proposal->proposal_number)) {
-                $proposal->proposal_number = self::generateProposalNumber();
+                $date = now()->format('Ymd');
+                $count = static::whereDate('created_at', today())->count() + 1;
+                $proposal->proposal_number = 'PROP-' . $date . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
             }
         });
     }
@@ -63,30 +63,27 @@ class Proposal extends Model
         return $this->hasMany(ProposalItem::class);
     }
 
-    public function invoice(): HasMany
+    public function invoice(): HasOne
     {
-        return $this->hasMany(Invoice::class);
+        return $this->hasOne(Invoice::class);
     }
 
-    public static function generateProposalNumber(): string
+    public static function getStatuses(): array
     {
-        $date = now()->format('Ymd');
-        $lastProposal = self::whereDate('created_at', today())
-            ->orderBy('id', 'desc')
-            ->first();
-        
-        $sequence = $lastProposal ? intval(substr($lastProposal->proposal_number, -4)) + 1 : 1;
-        return 'PROP-' . $date . '-' . str_pad($sequence, 4, '0', STR_PAD_LEFT);
+        return [
+            'draft' => 'Draft',
+            'sent' => 'Terkirim',
+            'accepted' => 'Diterima',
+            'rejected' => 'Ditolak',
+            'expired' => 'Kadaluarsa',
+        ];
     }
 
     public function calculateTotals()
     {
-        $subtotal = $this->items->sum(function ($item) {
-            return $item->qty * $item->price;
-        });
-
-        $this->subtotal = $subtotal;
-        $this->tax_amount = $subtotal * ($this->tax_rate / 100);
-        $this->total_amount = $subtotal + $this->tax_amount - $this->discount;
+        $this->subtotal = $this->items->sum(fn($item) => $item->qty * $item->price);
+        $this->tax_amount = $this->subtotal * ($this->tax_rate / 100);
+        $this->total_amount = $this->subtotal + $this->tax_amount - $this->discount;
+        $this->save();
     }
 }

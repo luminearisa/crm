@@ -19,7 +19,6 @@ class Event extends Model
         'end_time',
         'location',
         'type',
-        'all_day',
     ];
 
     protected function casts(): array
@@ -27,7 +26,6 @@ class Event extends Model
         return [
             'start_time' => 'datetime',
             'end_time' => 'datetime',
-            'all_day' => 'boolean',
         ];
     }
 
@@ -44,16 +42,10 @@ class Event extends Model
     public static function getTypes(): array
     {
         return [
-            'meeting' => 'Meeting',
-            'call' => 'Call',
-            'reminder' => 'Reminder',
-            'presentation' => 'Presentation',
-            'other' => 'Other',
+            'meeting' => 'Pertemuan',
+            'call' => 'Telepon',
+            'deadline' => 'Tenggat Waktu',
+            'other' => 'Lainnya',
         ];
-    }
-
-    public function getTypeLabelAttribute(): string
-    {
-        return self::getTypes()[$this->type] ?? $this->type;
     }
 }
