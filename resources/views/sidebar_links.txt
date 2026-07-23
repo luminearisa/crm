@@ -1,0 +1,26 @@
+# Daftar Link Sidebar yang Sudah Diimplementasikan:
+
+✅ Dashboard - /dashboard (route: dashboard)
+✅ Pipeline Leads - /leads (route: leads.index)
+✅ Klien - /clients (route: clients.index) - BARU DIBUAT
+✅ Proposal - /proposals (route: proposals.index)
+✅ Invoice - /invoices (route: invoices.index)
+
+❌ Aktivitas - Belum ada controller/view lengkap
+❌ Tugas - /tasks (route: tasks.index) - View dibuat, perlu controller
+❌ Kalender - /events (route: events.index) - Belum
+❌ Tiket Support - /tickets (route: tickets.index) - Belum
+❌ Dokumen - /documents (route: documents.index) - Belum
+❌ Pengeluaran - /expenses (route: expenses.index) - Belum
+❌ Layanan - /services (route: services.index) - Belum
+❌ Pengaturan - /settings (route: settings.index) - Belum (Admin only)
+❌ Leaderboard - /leaderboard (route: leaderboard.index) - Belum
+
+File yang sudah dibuat:
+- resources/views/clients/index.blade.php
+- resources/views/clients/create.blade.php
+- resources/views/clients/edit.blade.php
+- resources/views/clients/show.blade.php
+- resources/views/tasks/index.blade.php
+- resources/views/tasks/create.blade.php
+- resources/views/tasks/edit.blade.php

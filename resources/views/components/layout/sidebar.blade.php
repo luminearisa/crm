@@ -8,7 +8,7 @@
     <div class="flex items-center justify-between h-16 px-4 bg-slate-800 border-b border-slate-700">
         <div class="flex items-center space-x-2">
             <ion-icon name="business" class="text-2xl text-primary-400"></ion-icon>
-            <span class="text-lg font-bold">CRM Enterprise</span>
+            <span class="text-lg font-bold">NexusCRM</span>
         </div>
         <button 
             @click="sidebarOpen = false" 
@@ -35,8 +35,8 @@
         </a>
         
         <!-- Clients -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
+        <a href="{{ route('clients.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('clients.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
             <ion-icon name="people" class="text-lg mr-3"></ion-icon>
             Klien
         </a>
@@ -58,73 +58,45 @@
         <!-- Divider -->
         <div class="my-4 border-t border-slate-700"></div>
         
-        <!-- Activities -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="calendar" class="text-lg mr-3"></ion-icon>
-            Aktivitas
-        </a>
-        
         <!-- Tasks -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
+        <a href="{{ route('tasks.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('tasks.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
             <ion-icon name="checkbox" class="text-lg mr-3"></ion-icon>
             Tugas
         </a>
         
-        <!-- Events -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="today" class="text-lg mr-3"></ion-icon>
-            Kalender
+        <!-- Activities -->
+        <a href="{{ route('activities.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('activities.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+            <ion-icon name="chatbubbles" class="text-lg mr-3"></ion-icon>
+            Aktivitas
         </a>
         
-        <!-- Tickets -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="ticket" class="text-lg mr-3"></ion-icon>
-            Tiket Support
-        </a>
-        
-        <!-- Documents -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="folder" class="text-lg mr-3"></ion-icon>
-            Dokumen
-        </a>
-        
-        <!-- Expenses -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="wallet" class="text-lg mr-3"></ion-icon>
-            Pengeluaran
-        </a>
-        
-        <!-- Services -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="pricetag" class="text-lg mr-3"></ion-icon>
-            Layanan
+        <!-- Leaderboard -->
+        <a href="{{ route('leaderboard.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('leaderboard.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+            <ion-icon name="trophy" class="text-lg mr-3"></ion-icon>
+            Leaderboard
         </a>
         
         <!-- Divider -->
         <div class="my-4 border-t border-slate-700"></div>
         
+        <!-- Services -->
+        <a href="{{ route('services.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('services.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+            <ion-icon name="pricetag" class="text-lg mr-3"></ion-icon>
+            Layanan
+        </a>
+        
         <!-- Settings (Admin Only) -->
         @if(auth()->user()->role === 'admin')
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
+        <a href="{{ route('settings.index') }}" 
+           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg {{ request()->routeIs('settings.*') ? 'bg-primary-600 text-white' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
             <ion-icon name="settings" class="text-lg mr-3"></ion-icon>
             Pengaturan
         </a>
         @endif
-        
-        <!-- Leaderboard -->
-        <a href="#" 
-           class="flex items-center px-4 py-3 text-sm font-medium rounded-lg text-slate-300 hover:bg-slate-800 hover:text-white">
-            <ion-icon name="trophy" class="text-lg mr-3"></ion-icon>
-            Leaderboard
-        </a>
     </nav>
     
     <!-- User Info (Bottom) -->
