@@ -13,63 +13,26 @@ class Setting extends Model
         'key',
         'value',
         'type',
+        'description',
         'group',
-        'is_public',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_public' => 'boolean',
-        ];
-    }
 
     public static function get($key, $default = null)
     {
-        $setting = self::where('key', $key)->first();
-        
-        if (!$setting) {
-            return $default;
-        }
-
-        return self::castValue($setting->value, $setting->type);
+        $setting = static::where('key', $key)->first();
+        return $setting ? $setting->value : $default;
     }
 
-    public static function set($key, $value, $type = 'string', $group = 'general')
+    public static function set($key, $value)
     {
-        return self::updateOrCreate(
+        return static::updateOrCreate(
             ['key' => $key],
-            [
-                'value' => self::encodeValue($value, $type),
-                'type' => $type,
-                'group' => $group,
-            ]
+            ['value' => $value]
         );
-    }
-
-    private static function castValue($value, $type)
-    {
-        return match ($type) {
-            'number' => (float) $value,
-            'boolean' => (bool) $value,
-            'json' => json_decode($value, true),
-            default => $value,
-        };
-    }
-
-    private static function encodeValue($value, $type)
-    {
-        return match ($type) {
-            'json' => json_encode($value),
-            'boolean' => $value ? '1' : '0',
-            default => (string) $value,
-        };
     }
 
     public static function getGroup($group)
     {
-        return self::where('group', $group)->get()->mapWithKeys(function ($setting) {
-            return [$setting->key => self::castValue($setting->value, $setting->type)];
-        });
+        return static::where('group', $group)->get()->pluck('value', 'key');
     }
 }

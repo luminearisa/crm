@@ -15,8 +15,6 @@ class ProposalItem extends Model
         'service_id',
         'qty',
         'price',
-        'subtotal',
-        'description',
     ];
 
     protected function casts(): array
@@ -24,7 +22,6 @@ class ProposalItem extends Model
         return [
             'qty' => 'integer',
             'price' => 'decimal:2',
-            'subtotal' => 'decimal:2',
         ];
     }
 
@@ -38,12 +35,8 @@ class ProposalItem extends Model
         return $this->belongsTo(Service::class);
     }
 
-    protected static function boot()
+    public function getTotalAttribute(): float
     {
-        parent::boot();
-
-        static::saving(function ($item) {
-            $item->subtotal = $item->qty * $item->price;
-        });
+        return $this->qty * $this->price;
     }
 }

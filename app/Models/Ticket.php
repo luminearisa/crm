@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ticket extends Model
 {
@@ -17,7 +18,6 @@ class Ticket extends Model
         'description',
         'status',
         'priority',
-        'category',
         'resolved_at',
     ];
 
@@ -33,42 +33,46 @@ class Ticket extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function agent(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     public static function getStatuses(): array
     {
         return [
-            'open' => 'Open',
-            'progress' => 'In Progress',
-            'waiting_client' => 'Waiting Client',
-            'closed' => 'Closed',
+            'open' => 'Terbuka',
+            'progress' => 'Sedang Dikerjakan',
+            'closed' => 'Tertutup',
         ];
     }
 
     public static function getPriorities(): array
     {
         return [
-            'low' => 'Low',
-            'medium' => 'Medium',
-            'high' => 'High',
+            'low' => 'Rendah',
+            'medium' => 'Sedang',
+            'high' => 'Tinggi',
         ];
     }
 
-    public function getStatusLabelAttribute(): string
+    public function getStatusColorAttribute(): string
     {
-        return self::getStatuses()[$this->status] ?? $this->status;
+        return match($this->status) {
+            'closed' => 'green',
+            'progress' => 'blue',
+            'open' => 'red',
+            default => 'gray',
+        };
     }
 
-    public function getPriorityLabelAttribute(): string
+    public function getPriorityColorAttribute(): string
     {
-        return self::getPriorities()[$this->priority] ?? $this->priority;
-    }
-
-    public function isClosed(): bool
-    {
-        return $this->status === 'closed';
+        return match($this->priority) {
+            'high' => 'red',
+            'medium' => 'yellow',
+            'low' => 'green',
+            default => 'gray',
+        };
     }
 }

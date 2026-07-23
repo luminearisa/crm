@@ -14,9 +14,9 @@ class Service extends Model
         'name',
         'description',
         'base_price',
-        'unit',
         'is_active',
         'category',
+        'unit',
     ];
 
     protected function casts(): array
@@ -32,8 +32,27 @@ class Service extends Model
         return $this->hasMany(ProposalItem::class);
     }
 
-    public static function getActiveServices()
+    public static function getCategories(): array
     {
-        return self::where('is_active', true)->orderBy('name')->get();
+        return [
+            'development' => 'Development',
+            'design' => 'Design',
+            'consulting' => 'Consulting',
+            'marketing' => 'Marketing',
+            'support' => 'Support',
+            'other' => 'Other',
+        ];
+    }
+
+    public static function getUnits(): array
+    {
+        return [
+            'project' => 'Project',
+            'hour' => 'Hour',
+            'day' => 'Day',
+            'month' => 'Month',
+            'year' => 'Year',
+            'unit' => 'Unit',
+        ];
     }
 }

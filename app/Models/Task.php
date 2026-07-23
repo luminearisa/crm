@@ -16,16 +16,14 @@ class Task extends Model
         'title',
         'description',
         'due_date',
-        'priority',
         'status',
-        'completed_at',
+        'priority',
     ];
 
     protected function casts(): array
     {
         return [
             'due_date' => 'date',
-            'completed_at' => 'datetime',
         ];
     }
 
@@ -39,36 +37,31 @@ class Task extends Model
         return $this->belongsTo(Lead::class);
     }
 
-    public static function getPriorities(): array
-    {
-        return [
-            'low' => 'Low',
-            'medium' => 'Medium',
-            'high' => 'High',
-        ];
-    }
-
     public static function getStatuses(): array
     {
         return [
             'pending' => 'Pending',
-            'in_progress' => 'In Progress',
-            'completed' => 'Completed',
+            'in_progress' => 'Sedang Dikerjakan',
+            'completed' => 'Selesai',
         ];
     }
 
-    public function getPriorityLabelAttribute(): string
+    public static function getPriorities(): array
     {
-        return self::getPriorities()[$this->priority] ?? $this->priority;
+        return [
+            'low' => 'Rendah',
+            'medium' => 'Sedang',
+            'high' => 'Tinggi',
+        ];
     }
 
-    public function getStatusLabelAttribute(): string
+    public function getStatusColorAttribute(): string
     {
-        return self::getStatuses()[$this->status] ?? $this->status;
-    }
-
-    public function isOverdue(): bool
-    {
-        return $this->status !== 'completed' && $this->due_date < now();
+        return match($this->status) {
+            'completed' => 'green',
+            'in_progress' => 'blue',
+            'pending' => 'yellow',
+            default => 'gray',
+        };
     }
 }
