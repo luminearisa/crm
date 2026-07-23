@@ -93,7 +93,7 @@
             <x-layout.header />
             
             <!-- Page Content -->
-            <main class="flex-1 p-6 overflow-auto">
+            <main class="flex-1 overflow-auto">
                 @if(session('success'))
                     <div class="mb-6 p-4 bg-green-50 border-l-4 border-green-500 rounded-r-lg">
                         <div class="flex items-center">
